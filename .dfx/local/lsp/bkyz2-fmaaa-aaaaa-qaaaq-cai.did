@@ -1,0 +1,118 @@
+type User = 
+ record {
+   joinedAt: Time;
+   "principal": principal;
+   role: Role;
+   username: text;
+ };
+type UpdateTransactionResponse = 
+ variant {
+   categoryEmpty;
+   invalidTxn;
+   paymentMethodEmpty;
+   success;
+ };
+type TransactionId = nat;
+type Transaction = 
+ record {
+   amount: int;
+   category: Category;
+   createdAt: Time;
+   date: Time;
+   id: TransactionId;
+   notes: opt text;
+   owner: principal;
+   paymentMethod: PaymentMethod;
+   updatedAt: Time;
+ };
+type Time = int;
+type SetBudgetResponse = 
+ variant {
+   categoryEmpty;
+   success;
+ };
+type Role = 
+ variant {
+   Admin;
+   Editor;
+ };
+type RevokeAccessResponse = 
+ variant {
+   invalidUser;
+   success;
+   unauthorizedActivity;
+ };
+type PaymentMethod = text;
+type InviteToken = text;
+type InvitationResponse = 
+ variant {
+   alreadyRegistered;
+   alreadyUsedToken;
+   expiredToken;
+   invalidToken;
+   shortUsername;
+   success;
+ };
+type GenerateInviteLinkResponse = 
+ variant {
+   failed;
+   success;
+ };
+type DeleteTransactionResponse = 
+ variant {
+   invalidTxn;
+   success;
+ };
+type DeleteBudgetResponse = 
+ variant {
+   invalidCategory;
+   success;
+ };
+type Category = text;
+type Budget = 
+ record {
+   amount: nat;
+   category: Category;
+   updatedAt: Time;
+ };
+type AddTransactionResponse = 
+ variant {
+   categoryEmpty;
+   paymentMethodEmpty;
+   success;
+ };
+service : {
+  acceptInvite: (InviteToken, text) -> (InvitationResponse);
+  addTransaction: (Time, int, Category, PaymentMethod, opt text) ->
+   (AddTransactionResponse);
+  assertAdmin: () -> ();
+  deleteBudget: (Category) -> (DeleteBudgetResponse);
+  deleteTransaction: (TransactionId) -> (DeleteTransactionResponse);
+  generateInviteLink: () -> (GenerateInviteLinkResponse);
+  getAllTransactions: () -> (vec record {
+                                   TransactionId;
+                                   Transaction;
+                                 }) query;
+  getBudgetSummary: () -> (vec record {
+                                 Category;
+                                 nat;
+                                 int;
+                                 nat;
+                               }) query;
+  getBudgets: () -> (vec record {
+                           Category;
+                           Budget;
+                         }) query;
+  getFilteredTransactions: (opt Time, opt Time, opt int, opt int,
+   opt Category, opt PaymentMethod) ->
+   (vec record {
+          TransactionId;
+          Transaction;
+        }) query;
+  getTransaction: (TransactionId) -> (opt Transaction) query;
+  getUsers: () -> (vec User) query;
+  revokeAccess: (principal) -> (RevokeAccessResponse);
+  setBudget: (Category, nat) -> (SetBudgetResponse);
+  updateTransaction: (TransactionId, Time, int, Category, PaymentMethod,
+   opt text) -> (UpdateTransactionResponse);
+}

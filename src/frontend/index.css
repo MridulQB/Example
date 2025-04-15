@@ -1,0 +1,622 @@
+/* --- Base & Variables --- */
+:root {
+    --primary-color-light: #007bff;
+    --primary-color-dark: #3498db;
+    --secondary-color-light: #6c757d;
+    --secondary-color-dark: #5a6268;
+    --success-color-light: #28a745;
+    --success-color-dark: #2ecc71;
+    --danger-color-light: #dc3545;
+    --danger-color-dark: #e74c3c;
+    --warning-color-light: #ffc107;
+    --warning-color-dark: #f39c12;
+    --info-color-light: #17a2b8;
+    --info-color-dark: #3498db;
+
+    --bg-light: #f8f9fa;
+    --bg-dark: #2c3e50; /* Darker blue-grey */
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #34495e; /* Slightly lighter than main dark bg */
+    --text-light: #212529;
+    --text-dark: #ecf0f1; /* Light grey */
+    --text-muted-light: #6c757d;
+    --text-muted-dark: #bdc3c7; /* Lighter grey */
+    --border-light: #dee2e6;
+    --border-dark: #566573; /* Darker border */
+    --input-bg-light: #fff;
+    --input-bg-dark: #566573;
+    --input-border-light: #ced4da;
+    --input-border-dark: #7f8c8d;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    /* Default Theme (Light) */
+    --primary-color: var(--primary-color-light);
+    --secondary-color: var(--secondary-color-light);
+    --success-color: var(--success-color-light);
+    --danger-color: var(--danger-color-light);
+    --warning-color: var(--warning-color-light);
+    --info-color: var(--info-color-light);
+    --bg-color: var(--bg-light);
+    --card-bg-color: var(--card-bg-light);
+    --text-color: var(--text-light);
+    --text-muted-color: var(--text-muted-light);
+    --border-color: var(--border-light);
+    --input-bg-color: var(--input-bg-light);
+    --input-border-color: var(--input-border-light);
+    --shadow: var(--shadow-light);
+}
+
+body.dark-theme {
+    --primary-color: var(--primary-color-dark);
+    --secondary-color: var(--secondary-color-dark);
+    --success-color: var(--success-color-dark);
+    --danger-color: var(--danger-color-dark);
+    --warning-color: var(--warning-color-dark);
+    --info-color: var(--info-color-dark);
+    --bg-color: var(--bg-dark);
+    --card-bg-color: var(--card-bg-dark);
+    --text-color: var(--text-dark);
+    --text-muted-color: var(--text-muted-dark);
+    --border-color: var(--border-dark);
+    --input-bg-color: var(--input-bg-dark);
+    --input-border-color: var(--input-border-dark);
+    --shadow: var(--shadow-dark);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Layout --- */
+.app-header {
+    background-color: var(--card-bg-color);
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.main-nav .welcome-message {
+    font-size: 0.9rem;
+}
+.main-nav .principal-display {
+    font-size: 0.8rem;
+    color: var(--text-muted-color);
+    margin-left: 0.5rem;
+    background-color: var(--bg-color);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    overflow: hidden; /* Ensure header border radius works */
+}
+
+.card-header {
+    background-color: var(--secondary-color-light); /* Light header even in dark */
+    color: var(--text-light); /* Light header even in dark */
+    body.dark-theme & { /* Style adjustments for dark theme header */
+      background-color: var(--secondary-color-dark);
+      color: var(--text-dark);
+    }
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-content {
+    padding: 1.2rem;
+}
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+.card-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.3rem;
+}
+
+
+/* --- Buttons --- */
+.button {
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+.button:hover {
+    opacity: 0.9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.button:active {
+    transform: scale(0.98);
+}
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button.primary { background-color: var(--primary-color); color: white; }
+.button.secondary { background-color: var(--secondary-color); color: white; }
+.button.danger { background-color: var(--danger-color); color: white; }
+.button.success { background-color: var(--success-color); color: white; }
+.button.warning { background-color: var(--warning-color); color: var(--text-light); } /* Dark text on warning */
+
+.button.small { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+.button.icon-button { padding: 0.5rem; } /* For buttons with only an icon */
+/* Add specific icon styles if using a library */
+.button i { line-height: 1; /* Prevent extra spacing */ }
+
+/* --- Forms --- */
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.form-group small {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted-color);
+    margin-top: 0.2rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"], /* Added */
+input[type="email"], /* Added */
+textarea,
+select { /* Added */
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 0, 123, 255), 0.25); /* Need RGB version of primary */
+}
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted-color);
+    opacity: 0.8;
+}
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Add :root variables for RGB versions if needed for focus shadow */
+:root { --primary-color-rgb: 0, 123, 255; }
+body.dark-theme { --primary-color-rgb: 52, 152, 219; }
+
+
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end; /* Align items to bottom */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.form-inline .form-group {
+    flex: 1; /* Allow groups to grow */
+    min-width: 150px; /* Prevent extreme shrinking */
+    margin-bottom: 0; /* Reset margin for inline */
+}
+.form-inline button {
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+/* --- Filters --- */
+.filters-container {
+    background-color: rgba(var(--secondary-color-rgb, 108, 117, 125), 0.05); /* Need RGB */
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+.filters-container h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.filter-grid label {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+.filter-grid input {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+.filter-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+/* --- Lists (Transactions, Budgets, Users) --- */
+.list-container {
+    margin-top: 1rem;
+    position: relative; /* For loader positioning */
+    min-height: 50px; /* To show loader properly */
+}
+.list-item {
+    background-color: var(--bg-color);
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+.list-item:hover {
+    background-color: rgba(var(--secondary-color-rgb, 108, 117, 125), 0.08); /* Need RGB */
+}
+.list-item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 1rem; /* Vertical gap smaller */
+    font-size: 0.9rem;
+}
+.list-item-details span { display: inline-block; } /* Prevent weird wrapping */
+.list-item-details small { font-size: 0.8rem; color: var(--text-muted-color); display: block; width: 100%; margin-top: 0.2rem;}
+.list-item-actions {
+    white-space: nowrap;
+    display: flex;
+    gap: 0.5rem;
+}
+.list-item-actions .button {
+    padding: 0.3rem 0.6rem; /* Smaller action buttons */
+    font-size: 0.8rem;
+}
+.list-item-actions .icon-button {
+     padding: 0.4rem;
+}
+
+.income { color: var(--success-color); font-weight: 500; }
+.expense { color: var(--danger-color); font-weight: 500; }
+.budget-summary-list { list-style: none; padding: 0; }
+.budget-summary-list li { margin-bottom: 0.5rem; font-size: 0.95rem;}
+.budget-summary-list .over-budget { color: var(--danger-color); font-weight: bold; }
+.budget-summary-list .near-budget { color: var(--warning-color); }
+
+/* --- Admin Specific --- */
+.admin-subsection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+.admin-subsection:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+.invite-link-section {
+    background-color: rgba(var(--info-color-rgb, 23, 162, 184), 0.1); /* Need RGB */
+    border: 1px solid rgba(var(--info-color-rgb, 23, 162, 184), 0.3);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+.invite-link-section p { margin-top: 0; margin-bottom: 0.5rem; font-weight: 500;}
+.invite-link-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+.invite-link-wrapper code {
+    flex-grow: 1;
+    overflow-x: auto; /* Handle long links */
+    white-space: nowrap;
+    font-size: 0.9rem;
+    background: none;
+    padding: 0.2rem;
+}
+
+/* --- Modals --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+}
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+.modal {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: block; /* Change from flex */
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal-overlay.visible .modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-content {
+    padding: 1.5rem;
+}
+.modal-header {
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 0;
+}
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.confirmation-modal {
+    max-width: 400px;
+}
+.confirmation-modal p {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Loaders --- */
+.loading-placeholder {
+    color: var(--text-muted-color);
+    padding: 1rem;
+    text-align: center;
+    font-style: italic;
+    display: none; /* Hidden by default */
+}
+.loading .loading-placeholder {
+    display: block; /* Show when parent has .loading class */
+}
+.loading .actual-content {
+    display: none; /* Hide content when loading */
+}
+
+.global-loader {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(var(--bg-color-rgb, 248, 249, 250), 0.8); /* Need RGB */
+    display: flex;
+    flex-direction: column; /* Stack spinner and text */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Above modals */
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+body.dark-theme .global-loader {
+    background-color: rgba(var(--bg-dark-rgb, 44, 62, 80), 0.85); /* Need RGB */
+}
+
+.spinner {
+    border: 4px solid rgba(var(--text-color-rgb, 33, 37, 41), 0.1); /* Need RGB */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: var(--primary-color);
+    margin-bottom: 0.8rem; /* Space between spinner and text */
+    animation: spin 1s linear infinite;
+}
+body.dark-theme .spinner {
+     border: 4px solid rgba(var(--text-dark-rgb, 236, 240, 241), 0.2);
+     border-left-color: var(--primary-color);
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Toasts --- */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.toast {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    min-width: 250px;
+    max-width: 400px;
+    font-size: 0.95rem;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.toast.success { background-color: var(--success-color); color: white; }
+.toast.error { background-color: var(--danger-color); color: white; }
+.toast.info { background-color: var(--info-color); color: white; }
+.toast.warning { background-color: var(--warning-color); color: var(--text-light); } /* Dark text on warning */
+
+
+/* --- Utility & Accessibility --- */
+.error-message { /* Used in invite modal */
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    margin-top: -0.5rem; /* Pull up slightly */
+    margin-bottom: 1rem;
+}
+
+/* Add :root variables for RGB versions needed */
+:root {
+    --primary-color-rgb: 0, 123, 255;
+    --secondary-color-rgb: 108, 117, 125;
+    --info-color-rgb: 23, 162, 184;
+    --bg-color-rgb: 248, 249, 250;
+    --text-color-rgb: 33, 37, 41;
+}
+body.dark-theme {
+    --primary-color-rgb: 52, 152, 219;
+    --secondary-color-rgb: 90, 98, 104; /* Adjusted dark secondary */
+    --info-color-rgb: 52, 152, 219; /* Using primary dark for info */
+    --bg-dark-rgb: 44, 62, 80;
+    --bg-color-rgb: 44, 62, 80; /* Set for dark theme */
+    --text-dark-rgb: 236, 240, 241;
+    --text-color-rgb: 236, 240, 241; /* Set for dark theme */
+}
+
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    .main-nav {
+        margin-top: 0.8rem;
+        width: 100%;
+        flex-wrap: wrap; /* Allow wrapping */
+    }
+     .main-nav #userInfo {
+        order: -1; /* Move user info first on mobile */
+        width: 100%;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+     .main-nav .principal-display { display: none; } /* Hide principal on small screens */
+
+    .app-container {
+        margin-top: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr; /* Stack filters */
+    }
+    .form-inline {
+        flex-direction: column;
+        align-items: stretch; /* Stretch items full width */
+    }
+    .form-inline .form-group { min-width: auto; }
+
+    .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .list-item-details { margin-bottom: 0.8rem; }
+    .list-item-actions { width: 100%; justify-content: flex-end; }
+
+    .modal { width: 95%; }
+    .toast-container { width: 90%; right: 5%; bottom: 10px; }
+}
