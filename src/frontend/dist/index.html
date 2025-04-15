@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget Tracker</title>
-    <!-- Link to an icon library (e.g., Font Awesome) - REPLACE THIS with your chosen library -->
+    <!-- Link to an icon library (e.g., Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+  <script type="module" crossorigin src="/assets/index-bf12ec8b.js"></script>
 </head>
-<body class="light-theme"> <!-- Start with a default theme class -->
+<body class="light-theme">
     <header class="app-header">
         <div class="logo">
-            <!-- <i class="icon-wallet"></i> Placeholder Icon -->
             <h1>Budget Tracker</h1>
         </div>
         <nav class="main-nav">
             <button id="loginBtn" class="button primary">
-                <!-- <i class="icon-login"></i> --> Login with Internet Identity
+                Login with Internet Identity
             </button>
             <div id="userInfo" style="display: none;">
                 <span class="welcome-message">Welcome, <strong id="username"></strong> (<span id="userRole"></span>)</span>
                 <span class="principal-display" id="userPrincipal"></span>
                 <button id="logoutBtn" class="button secondary small" title="Logout">
-                    <!-- <i class="icon-logout"></i> --> Logout
+                    Logout
                 </button>
             </div>
             <button id="themeToggleBtn" class="button icon-button" title="Toggle Theme">
-                <!-- <i class="icon-theme"></i> Placeholder Icon --> T
+                T
             </button>
         </nav>
     </header>
@@ -35,7 +35,7 @@
         <!-- Dashboard Section -->
         <section id="dashboard" class="card">
             <h2 class="card-header">
-                <!-- <i class="icon-dashboard"></i> --> Dashboard
+                Dashboard
             </h2>
             <div class="card-content">
                 <div id="budgetSummary">
@@ -47,10 +47,9 @@
                 </div>
                 <div id="charts">
                     <h3>Spending Visualizations</h3>
-                     <div class="chart-container">
+                    <div class="chart-container">
                         <canvas id="categoryChart"></canvas>
                     </div>
-                    <!-- Add more canvas elements for other charts if needed -->
                 </div>
             </div>
         </section>
@@ -58,7 +57,7 @@
         <!-- Transactions Section -->
         <section id="transactions" class="card">
             <h2 class="card-header">
-                <!-- <i class="icon-transactions"></i> --> Transactions
+                Transactions
             </h2>
             <div class="card-content">
                 <div id="transactionFilters" class="filters-container">
@@ -72,17 +71,17 @@
                         <label>Payment Method: <input type="text" id="filterPaymentMethod" placeholder="e.g., Credit Card"></label>
                     </div>
                     <div class="filter-actions">
-                         <button id="applyFiltersBtn" class="button primary">
-                             <!-- <i class="icon-filter"></i> --> Apply Filters
+                        <button id="applyFiltersBtn" class="button primary">
+                            Apply Filters
                         </button>
-                         <button id="clearFiltersBtn" class="button secondary">
-                             <!-- <i class="icon-clear"></i> --> Clear Filters
+                        <button id="clearFiltersBtn" class="button secondary">
+                            Clear Filters
                         </button>
                     </div>
                 </div>
                 <div class="section-actions">
                     <button id="addTransactionBtn" class="button primary">
-                        <!-- <i class="icon-add"></i> --> Add New Transaction
+                        Add New Transaction
                     </button>
                 </div>
                 <div id="transactionListContainer">
@@ -90,7 +89,6 @@
                     <div id="transactionList" aria-live="polite">
                         <!-- Transactions will be loaded here -->
                     </div>
-                    <!-- Add Pagination controls here if implemented -->
                 </div>
             </div>
         </section>
@@ -98,24 +96,24 @@
         <!-- Admin Panel Section -->
         <section id="adminPanel" class="card" style="display: none;">
             <h2 class="card-header">
-                <!-- <i class="icon-admin"></i> --> Admin Panel
+                Admin Panel
             </h2>
             <div class="card-content">
                 <!-- Manage Budgets Sub-section -->
                 <div id="manageBudgets" class="admin-subsection">
                     <h3>Manage Budgets</h3>
                     <form id="budgetForm" class="form-inline">
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="budgetCategory">Category*:</label>
                             <input type="text" id="budgetCategory" required>
-                         </div>
-                         <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label for="budgetAmount">Monthly Amount*:</label>
                             <input type="number" id="budgetAmount" min="0" step="0.01" required>
-                         </div>
-                         <button type="submit" class="button primary">
-                            <!-- <i class="icon-save"></i> --> Set/Update Budget
-                         </button>
+                        </div>
+                        <button type="submit" class="button primary">
+                            Set/Update Budget
+                        </button>
                     </form>
                     <div class="list-container">
                         <div class="loading-placeholder" id="budgetListLoader">Loading budgets...</div>
@@ -130,7 +128,7 @@
                     <h3>Manage Users</h3>
                     <div class="section-actions">
                         <button id="inviteUserBtn" class="button primary">
-                            <!-- <i class="icon-invite"></i> --> Generate Invite Link
+                            Generate Invite Link
                         </button>
                     </div>
                     <div id="inviteLinkDisplay" class="invite-link-section" style="display: none;">
@@ -138,7 +136,7 @@
                         <div class="invite-link-wrapper">
                             <code id="inviteLink"></code>
                             <button id="copyInviteLinkBtn" class="button secondary small icon-button" title="Copy Link">
-                                <!-- <i class="icon-copy"></i> --> Copy
+                                Copy
                             </button>
                         </div>
                     </div>
@@ -152,7 +150,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Modals -->
@@ -175,14 +172,14 @@
                     <label for="transactionCategory">Category*:</label>
                     <input type="text" id="transactionCategory" required list="categorySuggestions">
                     <datalist id="categorySuggestions">
-                        <!-- Options added dynamically or predefined -->
+                        <!-- Options added dynamically -->
                     </datalist>
                 </div>
                 <div class="form-group">
                     <label for="transactionPaymentMethod">Payment Method*:</label>
                     <input type="text" id="transactionPaymentMethod" required list="paymentMethodSuggestions">
-                     <datalist id="paymentMethodSuggestions">
-                        <!-- Options added dynamically or predefined -->
+                    <datalist id="paymentMethodSuggestions">
+                        <!-- Options added dynamically -->
                     </datalist>
                 </div>
                 <div class="form-group">
@@ -191,7 +188,7 @@
                 </div>
                 <div class="modal-actions">
                     <button type="submit" class="button primary">
-                        <!-- <i class="icon-save"></i> --> Save Transaction
+                        Save Transaction
                     </button>
                     <button type="button" id="closeTransactionModalBtn" class="button secondary">Cancel</button>
                 </div>
@@ -199,32 +196,32 @@
         </div>
 
         <!-- Accept Invite Modal -->
-         <div id="acceptInviteModal" class="modal" style="display: none;">
+        <div id="acceptInviteModal" class="modal" style="display: none;">
             <form id="acceptInviteForm" class="modal-content">
                 <h3 class="modal-header">Accept Invite</h3>
-                 <p>You've been invited to join as an Editor. Please choose a username (at least 3 characters).</p>
+                <p>You've been invited to join as an Editor. Please choose a username (at least 3 characters).</p>
                 <input type="hidden" id="inviteToken">
                 <div class="form-group">
                     <label for="inviteUsername">Username*:</label>
                     <input type="text" id="inviteUsername" minlength="3" required>
                 </div>
-                 <p id="inviteError" class="error-message" style="display:none;"></p>
+                <p id="inviteError" class="error-message" style="display:none;"></p>
                 <div class="modal-actions">
                     <button type="submit" class="button primary">Register</button>
-                    <button type="button" id="closeInviteModalBtn" class="button secondary">Cancel</button> <!-- Added cancel -->
+                    <button type="button" id="closeInviteModalBtn" class="button secondary">Cancel</button>
                 </div>
             </form>
         </div>
 
-         <!-- Confirmation Modal -->
+        <!-- Confirmation Modal -->
         <div id="confirmationModal" class="modal" style="display: none;">
-             <div class="modal-content confirmation-modal">
-                 <h3 class="modal-header">Confirm Action</h3>
-                 <p id="confirmationMessage"></p>
-                 <div class="modal-actions">
-                     <button id="confirmYesBtn" class="button danger">Yes</button>
-                     <button id="confirmNoBtn" class="button secondary">No</button>
-                 </div>
+            <div class="modal-content confirmation-modal">
+                <h3 class="modal-header">Confirm Action</h3>
+                <p id="confirmationMessage"></p>
+                <div class="modal-actions">
+                    <button id="confirmYesBtn" class="button danger">Yes</button>
+                    <button id="confirmNoBtn" class="button secondary">No</button>
+                </div>
             </div>
         </div>
     </div>
@@ -238,5 +235,6 @@
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="toast-container"></div>
 
+    
 </body>
 </html>

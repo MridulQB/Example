@@ -3,11 +3,17 @@ import { fileURLToPath, URL } from "url";
 import environment from "vite-plugin-environment";
 
 export default defineConfig({
-  logLevel: "error",
+  root: "./",
+  logLevel: "info",
   build: {
+    // outDir: "../../dist/frontend",
     emptyOutDir: true,
     sourcemap: false,
     minify: false,
+    rollupOptions: {
+      // Fallback: externalize /src/index.ts if resolution still fails
+      external: ["/src/index.ts"],
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -29,6 +35,7 @@ export default defineConfig({
     environment("all", { prefix: "DFX_" }),
   ],
   resolve: {
+    extensions: [".js", ".ts"],
     alias: [
       {
         find: "declarations",

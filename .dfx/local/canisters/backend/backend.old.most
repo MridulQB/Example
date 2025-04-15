@@ -1,0 +1,45 @@
+// Version: 1.0.0
+type Budget = {amount : Nat; category : Category; updatedAt : Time};
+type Category = Text;
+type Invite =
+  {
+    createdAt : Time;
+    createdBy : Principal;
+    expiresAt : Time;
+    token : InviteToken;
+    usedBy : ?Principal
+  };
+type InviteToken = Text;
+type PaymentMethod = Text;
+type Role = {#Admin; #Editor};
+type Time = Int;
+type Transaction =
+  {
+    amount : Int;
+    category : Category;
+    createdAt : Time;
+    date : Time;
+    id : TransactionId;
+    notes : ?Text;
+    owner : Principal;
+    paymentMethod : PaymentMethod;
+    updatedAt : Time
+  };
+type TransactionId = Nat;
+type Tree<K, V> =
+  {
+    #black : (Tree<K, V>, K, V, Tree<K, V>);
+    #leaf;
+    #red : (Tree<K, V>, K, V, Tree<K, V>)
+  };
+type User =
+  {joinedAt : Time; principal : Principal; role : Role; username : Text};
+actor {
+  stable var adminPrincipal : ?Principal;
+  stable var budgets : {root : Tree<Category, Budget>; size : Nat};
+  stable var invites : {root : Tree<Category, Invite>; size : Nat};
+  stable var nextTransactionId : Nat;
+  stable var transactions :
+    {root : Tree<TransactionId, Transaction>; size : Nat};
+  stable var users : {root : Tree<Principal, User>; size : Nat}
+};
